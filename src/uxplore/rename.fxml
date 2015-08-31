@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="250.0" maxWidth="350.0" minHeight="250.0" minWidth="350.0" prefHeight="250.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml" fx:controller="uxplore.RenameController">
+  <children>
+    <Label alignment="CENTER" layoutX="93.0" prefHeight="40.0" prefWidth="164.0" text="Enter new name for item" AnchorPane.topAnchor="31.95" />
+    <TextField fx:id="name" layoutX="75.0" layoutY="105.0" prefHeight="40.0" prefWidth="200.0" />
+    <Button layoutX="137.0" layoutY="176.0" mnemonicParsing="false" onAction="#rename" prefHeight="31.0" prefWidth="77.0" text="Rename" />
+  </children>
+</AnchorPane>
