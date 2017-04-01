@@ -52,7 +52,7 @@ public class RenameController implements Initializable {
         }
         ExplorerController.items = opm.openFolder(new FSItem(ExplorerController.path));
         ViewManager vm = new ViewManager();
-        vm.updateView(ExplorerController.items, ExplorerController.container, ExplorerController.handler);
+        vm.updateView(ExplorerController.items, new ExplorerController().getInstance().getContainer(), ExplorerController.handler);
         Button okButton= (Button)e.getSource();
         Stage stage=(Stage) okButton.getScene().getWindow();
         stage.close();

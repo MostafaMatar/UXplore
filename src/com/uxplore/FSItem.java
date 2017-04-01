@@ -93,6 +93,4 @@ public class FSItem {
         FSItem item=(FSItem)obj;
         return this.fsItemPath.equals(item.fsItemPath);
     }
-    
-    
 }

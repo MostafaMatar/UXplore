@@ -159,7 +159,6 @@ public class OperationManager {
         try {
             Desktop.getDesktop().open(new File(file.getFsItemPath()));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return false;

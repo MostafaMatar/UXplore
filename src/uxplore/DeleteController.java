@@ -39,7 +39,7 @@ public class DeleteController implements Initializable {
         opm.delete(selected);
         System.out.println(ExplorerController.items.remove(selected));
         ViewManager vm = new ViewManager();
-        vm.updateView(ExplorerController.items, ExplorerController.container, ExplorerController.handler);
+        vm.updateView(ExplorerController.items, new ExplorerController().getInstance().getContainer(), ExplorerController.handler);
         this.closeDialog((Button) e.getSource());
     }
 

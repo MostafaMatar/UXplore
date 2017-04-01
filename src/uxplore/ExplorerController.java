@@ -29,11 +29,10 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 /**
- * main controller of the apllication
+ * main controller of the application
  * @author Mostafa
  */
 public class ExplorerController implements Initializable {
-
     /**
      * current path in file system
      */
@@ -58,14 +57,47 @@ public class ExplorerController implements Initializable {
      * the container of the items displayed
      */
     @FXML
-    public static TilePane container;
+    private TilePane container;
+    
+    /**
+     * the name of the selected item displayed on the footer
+     */
+    @FXML
+    private Label selectedName;
+    
+    public TilePane getContainer(){
+        return this.container;
+    }
+    public void setContainer(TilePane c){
+        this.container = c;
+    }
+    /**
+     * @return the selectedName
+     */
+    public Label getSelectedName() {
+        return selectedName;
+    }
+
+    /**
+     * @param selectedName the selectedName to set
+     */
+    public void setSelectedName(String selectedName) {
+        this.selectedName.setText(selectedName);
+    }
+    
+    private static ExplorerController con;
+    public ExplorerController getInstance(){
+        return ExplorerController.con;
+    }
     
     /**
      * event handler for clicking an item
      */
     public static EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {
+        @Override
         public void handle(MouseEvent e) {
             VBox clickedTile = (VBox) e.getSource();
+            Label text = (Label) clickedTile.getChildren().get(1);
             if (e.getClickCount() == 1) {
                 if (ExplorerController.selectedTile == null) {
                     clickedTile.setStyle("-fx-background-color:aqua;");
@@ -73,17 +105,19 @@ public class ExplorerController implements Initializable {
                     ExplorerController.selectedTile.setStyle("-fx-background-color:#ffffff;");
                     clickedTile.setStyle("-fx-background-color:aqua;");
                 }
+                new ExplorerController().getInstance().setSelectedName(text.getText());
                 ExplorerController.selectedTile = clickedTile;
             } else {
-                Label text = (Label) clickedTile.getChildren().get(1);
                 OperationManager opm = new OperationManager();
+                if(! ExplorerController.path.isEmpty())
+                    ExplorerController.path = (ExplorerController.path.endsWith("\\"))? ExplorerController.path : ExplorerController.path+"\\";
                 FSItem parent = new FSItem(ExplorerController.path + text.getText());
                 if (Files.isDirectory(Paths.get(parent.getFsItemPath()))) {
                     ExplorerController.items.clear();
                     ExplorerController.items = opm.openFolder(parent);
                     ExplorerController.path = parent.getFsItemPath();
                     ViewManager vm = new ViewManager();
-                    vm.updateView(ExplorerController.items, ExplorerController.container, this);
+                    vm.updateView(ExplorerController.items, new ExplorerController().getInstance().getContainer(), this);
                 } else {
                     FSItem file = new FSItem(parent.getFsItemPath());
                     opm.openFile(file);
@@ -100,13 +134,14 @@ public class ExplorerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ExplorerController.operationItem = null;
-        ExplorerController.container.setStyle("-fx-background-color:#ffffff;");
+        ExplorerController.con = this;
+        this.container.setStyle("-fx-background-color:#ffffff;");
         ExplorerController.items = new ArrayList<>();
         OperationManager opm = new OperationManager();
         ExplorerController.items = opm.getRoots();
 
         ViewManager vm = new ViewManager();
-        vm.updateView(ExplorerController.items, ExplorerController.container, handler);
+        vm.updateView(ExplorerController.items, this.container, handler);
     }
 
     /**
@@ -126,8 +161,9 @@ public class ExplorerController implements Initializable {
                 ExplorerController.items = opm.openFolder(new FSItem(p.toString()));
                 ExplorerController.path = p.toString();
             }
+            new ExplorerController().getInstance().setSelectedName(ExplorerController.path.substring(ExplorerController.path.lastIndexOf("\\")+1));
             ViewManager vm = new ViewManager();
-            vm.updateView(ExplorerController.items, ExplorerController.container, this.handler);
+            vm.updateView(ExplorerController.items, this.container, ExplorerController.handler);
         }
     }
 
@@ -180,14 +216,18 @@ public class ExplorerController implements Initializable {
     @FXML
     protected void open(ActionEvent e){
         Label selectedItemName = (Label) ExplorerController.selectedTile.getChildren().get(1);
-        FSItem selected=new FSItem(ExplorerController.path + "\\" + selectedItemName.getText());
+        String old = ExplorerController.path.equals("")? "" : ExplorerController.path ;
+        System.out.println(ExplorerController.path);
+        if(!old.equals(""))
+            old = old.endsWith("\\") ? old : (old+"\\");
+        FSItem selected=new FSItem(old + selectedItemName.getText());
         OperationManager opm=new OperationManager(); 
         if (Files.isDirectory(Paths.get(selected.getFsItemPath()))) {
             ExplorerController.items.clear();
             ExplorerController.items=opm.openFolder(selected);
-            ExplorerController.path+="\\"+selectedItemName.getText();
+            ExplorerController.path = old + selectedItemName.getText();
             ViewManager vm=new ViewManager();
-            vm.updateView(ExplorerController.items, ExplorerController.container, this.handler);
+            vm.updateView(ExplorerController.items, this.container, this.handler);
         } else {
             opm.openFile(selected);
         }
