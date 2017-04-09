@@ -13,7 +13,7 @@
       <bottom>
         <AnchorPane prefHeight="25.0" prefWidth="200.0">
                <children>
-                  <Label fx:id = "selectedName" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                  <Label fx:id="selectedName" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="5.0" />
                </children></AnchorPane>
       </bottom>
       <center>
@@ -34,17 +34,12 @@
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
+                    <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#delete" text="Delete" />
                   </items>
                 </Menu>
               </menus>
