@@ -18,12 +18,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -64,6 +66,21 @@ public class ExplorerController implements Initializable {
      */
     @FXML
     private Label selectedName;
+    
+    @FXML
+    private ImageView backImg;
+    @FXML
+    private ImageView copyImg;
+    @FXML
+    private ImageView cutImg;
+    @FXML
+    private ImageView pasteImg;
+    @FXML
+    private ImageView openImg;
+    @FXML
+    private ImageView renameImg;
+    @FXML
+    private ImageView deleteImg;
     
     public TilePane getContainer(){
         return this.container;
@@ -139,7 +156,13 @@ public class ExplorerController implements Initializable {
         ExplorerController.items = new ArrayList<>();
         OperationManager opm = new OperationManager();
         ExplorerController.items = opm.getRoots();
-
+        Tooltip.install(copyImg, new Tooltip("Copy"));
+        Tooltip.install(pasteImg, new Tooltip("Paste"));
+        Tooltip.install(cutImg, new Tooltip("Cut"));
+        Tooltip.install(openImg, new Tooltip("Open"));
+        Tooltip.install(deleteImg, new Tooltip("Delete"));
+        Tooltip.install(renameImg, new Tooltip("Rename"));
+        Tooltip.install(backImg, new Tooltip("Back"));
         ViewManager vm = new ViewManager();
         vm.updateView(ExplorerController.items, this.container, handler);
     }
@@ -149,7 +172,7 @@ public class ExplorerController implements Initializable {
      * @param e 
      */
     @FXML
-    protected void goBack(ActionEvent e) {
+    protected void goBack(MouseEvent e) {
         if (!ExplorerController.path.equals("")) {
             OperationManager opm = new OperationManager();
             ExplorerController.items.clear();
@@ -172,7 +195,7 @@ public class ExplorerController implements Initializable {
      * @param e 
      */
     @FXML
-    protected void copy(ActionEvent e) {
+    protected void copy(MouseEvent e) {
         Label selectedItemName = (Label) ExplorerController.selectedTile.getChildren().get(1);
         if (!selectedItemName.getText().equals("")) {
             ExplorerController.operationItem = new FSItem(ExplorerController.path + "\\" + selectedItemName.getText());
@@ -191,7 +214,7 @@ public class ExplorerController implements Initializable {
      * @param e 
      */
     @FXML
-    protected void paste(ActionEvent e) {
+    protected void paste(MouseEvent e) {
         OperationManager opm = new OperationManager();
         if (ExplorerController.isCut) {
             opm.cut(ExplorerController.operationItem, ExplorerController.path);
@@ -205,7 +228,7 @@ public class ExplorerController implements Initializable {
      * @param e 
      */
     @FXML
-    protected void delete(ActionEvent e){
+    protected void delete(MouseEvent e){
         this.showDeleteDialog();
     }
     
@@ -214,7 +237,7 @@ public class ExplorerController implements Initializable {
      * @param e 
      */
     @FXML
-    protected void open(ActionEvent e){
+    protected void open(MouseEvent e){
         Label selectedItemName = (Label) ExplorerController.selectedTile.getChildren().get(1);
         String old = ExplorerController.path.equals("")? "" : ExplorerController.path ;
         System.out.println(ExplorerController.path);
@@ -238,7 +261,7 @@ public class ExplorerController implements Initializable {
      * @param e 
      */
     @FXML
-    protected void rename(ActionEvent e){
+    protected void rename(MouseEvent e){
         
         this.showRenameDialog();
     }
@@ -275,5 +298,9 @@ public class ExplorerController implements Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+    }
+    @FXML
+    protected void close(ActionEvent e) {
+        System.exit(0);
     }
 }

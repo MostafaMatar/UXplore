@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?language javascript?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.TilePane?>
 
-<AnchorPane id="AnchorPane" minWidth="150.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uxplore.ExplorerController">
+<AnchorPane id="AnchorPane" minWidth="150.0" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.102" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uxplore.ExplorerController">
   <children>
     <BorderPane prefHeight="480.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
@@ -44,19 +52,47 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <ToolBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+            <ToolBar layoutY="26.0" prefHeight="39.0" prefWidth="640.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
               <items>
-                <Button mnemonicParsing="false" onAction="#goBack" text="back" />
+                <ImageView fx:id="backImg" fitHeight="150.0" fitWidth="20.0" onMouseClicked="#goBack" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@imgs/back.png" />
+                    </image>
+                </ImageView>
                 <Separator orientation="VERTICAL" />
-                <Button mnemonicParsing="false" onAction="#copy" text="copy" />
-                <Button mnemonicParsing="false" onAction="#copy" text="cut" />
-                <Button mnemonicParsing="false" onAction="#paste" text="paste" />
+                <ImageView fx:id="copyImg" fitHeight="150.0" fitWidth="20.0" onMouseClicked="#copy" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@imgs/copy.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="cutImg" fitHeight="150.0" fitWidth="20.0" onMouseClicked="#copy" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@imgs/cut.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="pasteImg" fitHeight="150.0" fitWidth="20.0" onMouseClicked="#paste" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@imgs/paste.png" />
+                    </image>
+                </ImageView>
                 <Separator orientation="VERTICAL" />
-                <Button mnemonicParsing="false" onAction="#delete" text="delete" />
+                <ImageView fx:id="deleteImg" fitHeight="150.0" fitWidth="20.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@imgs/delete.png" />
+                    </image>
+                </ImageView>
                 <Separator orientation="VERTICAL" />
-                <Button mnemonicParsing="false" onAction="#open" text="open" />
+                <ImageView fx:id="openImg" fitHeight="150.0" fitWidth="20.0" onMouseClicked="#open" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@imgs/open.png" />
+                    </image>
+                </ImageView>
                 <Separator orientation="VERTICAL" />
-                <Button mnemonicParsing="false" onAction="#rename" text="rename" />
+                <ImageView fx:id="renameImg" fitHeight="150.0" fitWidth="20.0" onMouseClicked="#rename" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@imgs/rename.png" />
+                    </image>
+                </ImageView>
               </items>
             </ToolBar>
           </children>
