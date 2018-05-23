@@ -201,8 +201,8 @@ public class ExplorerController implements Initializable {
             ExplorerController.operationItem = new FSItem(ExplorerController.path + "\\" + selectedItemName.getText());
             ExplorerController.operationItem.getItemProperties().setItemName(selectedItemName.getText());
         }
-        Button source = (Button) e.getSource();
-        if (source.getText().equals("copy")) {
+        ImageView source = (ImageView) e.getSource();
+        if (source.getId().equals("copyImg")) {
             ExplorerController.isCut = false;
         } else {
             ExplorerController.isCut = true;
@@ -273,14 +273,14 @@ public class ExplorerController implements Initializable {
         Parent root=null;    
         try {
             root = FXMLLoader.load(getClass().getResource("rename.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();            
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
         } catch (IOException ex) {
             Logger.getLogger(ExplorerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();            
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
     }
     
     /**
@@ -290,14 +290,14 @@ public class ExplorerController implements Initializable {
         Parent root=null;    
         try {
             root = FXMLLoader.load(getClass().getResource("delete.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();            
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
         } catch (IOException ex) {
             Logger.getLogger(ExplorerController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();            
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
     }
     @FXML
     protected void close(ActionEvent e) {

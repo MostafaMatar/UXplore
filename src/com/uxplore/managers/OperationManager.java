@@ -126,9 +126,9 @@ public class OperationManager {
         @Override
         public void run() {
             try {
-                Path filePath = Paths.get(x.getFsItemPath());
-                Path endPath = Paths.get(xPath + "\\" + x.getItemProperties().getItemName());
-                Files.move(filePath, endPath, StandardCopyOption.REPLACE_EXISTING);
+            	File src = new File(x.getFsItemPath());
+                File dest = new File(xPath + "\\" + x.getItemProperties().getItemName());
+                FileUtils.moveFile(src, dest);
             } catch (IOException e) {
                 e.printStackTrace();
             }
