@@ -21,7 +21,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.filechooser.FileSystemView;
 import org.apache.commons.io.*;
-import uxplore.ExplorerController;
 
 /**
  * a class responsible for performing copy/cut/delete/... operations on files
@@ -64,8 +63,8 @@ public class OperationManager {
     /**
      * copy item to destination path
      *
-     * @param targetItem
-     * @param targetPath
+     * @param targetItem the item to copy
+     * @param targetPath the destination of the new copy
      */
     public void copy(FSItem targetItem, String targetPath) {
         this.x = targetItem;
@@ -88,9 +87,9 @@ public class OperationManager {
     }
 
     /**
-     * delete item
+     * delete an item
      *
-     * @param targetItem
+     * @param targetItem the item to delay
      */
     public void delete(FSItem targetItem) {
         this.x = targetItem;
@@ -100,10 +99,10 @@ public class OperationManager {
     }
 
     /**
-     * rename item
+     * rename an item
      *
-     * @param targetItem
-     * @param newName
+     * @param targetItem the item to rename
+     * @param newName the new name for the item
      * @return
      */
     public boolean rename(FSItem targetItem, String newName) {
@@ -126,9 +125,9 @@ public class OperationManager {
         @Override
         public void run() {
             try {
-            	File src = new File(x.getFsItemPath());
-                File dest = new File(xPath + "\\" + x.getItemProperties().getItemName());
-                FileUtils.moveFile(src, dest);
+            	Path filePath = Paths.get(x.getFsItemPath());
+                Path endPath = Paths.get(xPath + "\\" + x.getItemProperties().getItemName());
+                Files.move(filePath, endPath, StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -138,8 +137,8 @@ public class OperationManager {
     /**
      * cut item
      *
-     * @param targetItem
-     * @param targetPath
+     * @param targetItem the item to move
+     * @param targetPath the new path for the item
      */
     public void cut(FSItem targetItem, String targetPath) {
         this.x = targetItem;
@@ -152,7 +151,7 @@ public class OperationManager {
     /**
      * open a file using default program
      *
-     * @param file
+     * @param file the file to open
      * @return
      */
     public boolean openFile(FSItem file) {
@@ -167,7 +166,7 @@ public class OperationManager {
     /**
      * open a folder and return it's contents
      *
-     * @param folder
+     * @param folder the folder to open
      * @return
      */
     public ArrayList<FSItem> openFolder(FSItem folder) {
@@ -246,7 +245,7 @@ public class OperationManager {
     /**
      * transform awt image to javafx image
      *
-     * @param image
+     * @param image the image to transform
      * @return
      */
     private javafx.scene.image.Image createImage(java.awt.Image image) {

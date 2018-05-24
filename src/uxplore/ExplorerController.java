@@ -18,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -164,7 +163,7 @@ public class ExplorerController implements Initializable {
         Tooltip.install(renameImg, new Tooltip("Rename"));
         Tooltip.install(backImg, new Tooltip("Back"));
         ViewManager vm = new ViewManager();
-        vm.updateView(ExplorerController.items, this.container, handler);
+        vm.updateView(ExplorerController.items, this.container, ExplorerController.handler);
     }
 
     /**
@@ -250,7 +249,7 @@ public class ExplorerController implements Initializable {
             ExplorerController.items=opm.openFolder(selected);
             ExplorerController.path = old + selectedItemName.getText();
             ViewManager vm=new ViewManager();
-            vm.updateView(ExplorerController.items, this.container, this.handler);
+            vm.updateView(ExplorerController.items, this.container, ExplorerController.handler);
         } else {
             opm.openFile(selected);
         }

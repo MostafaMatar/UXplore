@@ -45,7 +45,7 @@ public class DeleteController implements Initializable {
 
     /**
      * handler for canceling deletion
-     * @param e 
+     * @param e the event
      */
     @FXML
     protected void deny(ActionEvent e) {
@@ -54,7 +54,7 @@ public class DeleteController implements Initializable {
 
     /**
      * close the delete dialog
-     * @param b 
+     * @param b the button
      */
     private void closeDialog(Button b) {
         Stage stage = (Stage) b.getScene().getWindow();

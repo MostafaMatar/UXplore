@@ -7,7 +7,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 
@@ -19,9 +18,9 @@ public class ViewManager {
 
     /**
      * update the list of items displayed to user
-     * @param items
-     * @param container
-     * @param handler 
+     * @param items the list of items to show on the screen
+     * @param container the gui container representing the screen
+     * @param handler the event handler
      */
     public void updateView(ArrayList<FSItem> items, TilePane container, EventHandler<MouseEvent> handler) {
         container.getChildren().clear();
@@ -35,7 +34,6 @@ public class ViewManager {
                 l.setCenterShape(true);
                 l.setMaxWidth(120);
                 l.setMaxHeight(100);
-                //l.setWrapText(true);
                 ImageView i = new ImageView(item.getIcon().getIconImage());
                 i.setFitHeight(32);
                 i.setFitWidth(32);
